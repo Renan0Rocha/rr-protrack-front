@@ -17,7 +17,7 @@ export interface menu {
 }
 
 const sidebarItem: menu[] = [
-  { header: 'Starterkit' },
+  { header: 'Início' },
   {
     title: "Página Inicial",
     icon: 'screencast-2-linear',
@@ -25,60 +25,12 @@ const sidebarItem: menu[] = [
     to: "/",
   },
   
-  { header: 'Others' },
+  { header: 'Programação' },
   {
-    title: 'Contratos',
-    icon: 'double-alt-arrow-down-bold-duotone',
-    BgColor: 'secondary',
-    to: '#',
-    children: [
-      {
-        title: 'Nível 1', 
-        to: '/auth/404'
-      },
-      {
-        title: 'Nível 1',
-        to: '/auth/404',
-        children: [
-          {
-            title: 'Nível 2',
-  
-            to: '/auth/404'
-          },
-          {
-            title: 'Nível 2',
-  
-            to: '/auth/404',
-            children: [
-              {
-                title: 'Nível 3',
-      
-                to: '/auth/404'
-              },
-              {
-                title: 'Nível 3',
-      
-                to: '/auth/404'
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    title: 'Desabilitado',
+    title: 'Programas',
     icon: 'forbidden-circle-line-duotone',
     BgColor: 'success',
-    disabled: true,
-    to: '/auth/404'
-  },
-  {
-    title: 'Subtítulo',
-    BgColor: 'warning',
-    icon: 'square-academic-cap-line-duotone',
-    subCaption: 'This is the subtitle',
-    to: '/auth/404'
+    to: '/programa'
   },
   {
     title: 'Ordem do Bloco',
@@ -89,24 +41,7 @@ const sidebarItem: menu[] = [
     chipBgColor: 'error',
     chipVariant: 'flat',
     to: '/auth/404'
-  },
-  {
-    title: 'Outlined',
-    icon: 'smile-circle-line-duotone',
-    chip: 'outline',
-    chipColor: 'indigo',
-    chipVariant: 'outlined',
-    BgColor: 'indigo',
-    to: '/auth/404'
-  },
-  {
-    title: 'Link Externo',
-    icon: 'link-bold-duotone',
-    BgColor: 'info',
-    to: '/auth/404',
-    type: 'external'
   }
-
 ];
 
 export default sidebarItem;
