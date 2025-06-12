@@ -1,3 +1,4 @@
+import { paths } from '@/routes/paths';
 
 export interface menu {
   header?: string;
@@ -30,7 +31,7 @@ const sidebarItem: menu[] = [
     title: 'Programas',
     icon: 'forbidden-circle-line-duotone',
     BgColor: 'success',
-    to: '/programa'
+    to: paths.programa.list
   },
   {
     title: 'Ordem do Bloco',
