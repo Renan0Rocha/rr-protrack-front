@@ -5,50 +5,50 @@ import UiParentCard from '@/components/shared/UiParentCard.vue';
 import { paths } from '@/routes/paths';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { ProgramaService } from '~/services/programa-service';
-import { PROGRAMA_BREADCRUMBS_LIST, PROGRAMA_TABLE_HEADERS } from "./enums/programa-enums";
+import { FornecedorService } from '~/services/fornecedor-service';
+import { FORNECEDOR_BREADCRUMBS_LIST, FORNECEDOR_TABLE_HEADERS } from './enums/fornecedor-enums';
 
 const router = useRouter();
-const programas = ref<any[]>([]);
+const fornecedores = ref<any[]>([]);
 const loading = ref(true);
 
-const breadcrumbs = PROGRAMA_BREADCRUMBS_LIST;
-const headers = PROGRAMA_TABLE_HEADERS;
+const breadcrumbs = FORNECEDOR_BREADCRUMBS_LIST;
+const headers = FORNECEDOR_TABLE_HEADERS;
 
-const carregarProgramas = async () => {
+const carregarFornecedores = async () => {
   try {
     loading.value = true;
-    programas.value = await ProgramaService.findAll();
+    fornecedores.value = await FornecedorService.findAll();
   } catch (error) {
-    console.error('Erro ao carregar programas:', error);
+    console.error('Erro ao carregar fornecedores:', error);
   } finally {
     loading.value = false;
   }
 };
 
 const handleView = (id: number | string) => {
-  router.push(paths.programa.view(id.toString()));
+  router.push(paths.fornecedor.view(id.toString()));
 };
 
 const handleEdit = (id: number | string) => {
-  router.push(paths.programa.edit(id.toString()));
+  router.push(paths.fornecedor.edit(id.toString()));
 };
 
 const handleDelete = async (id: string | number) => {
-  if (!confirm('Deseja realmente excluir este programa?')) return;
+  if (!confirm('Deseja realmente excluir este fornecedor?')) return;
 
   try {
-    await ProgramaService.delete(Number(id));
-    alert('Programa excluído com sucesso!');
-    carregarProgramas();
+    await FornecedorService.delete(Number(id));
+    alert('Fornecedor excluído com sucesso!');
+    carregarFornecedores();
   } catch (error) {
-    alert('Erro ao excluir programa.');
+    alert('Erro ao excluir fornecedor.');
     console.error(error);
   }
 };
 
 onMounted(() => {
-  carregarProgramas();
+  carregarFornecedores();
 });
 </script>
 
@@ -56,16 +56,16 @@ onMounted(() => {
   <v-row>
     <v-col cols="12">
       <PageHeader
-        title="Programas"
+        title="Fornecedores"
         :breadcrumbs="breadcrumbs"
-        button-label="Novo Programa"
-        :button-to="paths.programa.new"
+        button-label="Novo Fornecedor"
+        :button-to="paths.fornecedor.new"
       />
 
-      <UiParentCard title="Listagem de Programas">
+      <UiParentCard title="Listagem de Fornecedores">
         <v-data-table
           :headers="headers"
-          :items="programas"
+          :items="fornecedores"
           :loading="loading"
           loading-text="Carregando..."
           class="elevation-1"

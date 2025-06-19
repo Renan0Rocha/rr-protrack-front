@@ -1,1 +1,3 @@
-export * from './programa-service;
+export * from './fornecedor-service';
+export * from './programa-service';
+

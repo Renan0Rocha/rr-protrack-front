@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import UiParentCard from '@/components/shared/UiParentCard.vue';
-import { useProgramaForm } from './resolvers/programa-resolver';
-import { ProgramaService } from '~/services/programa-service';
 import PageHeader from '@/components/shared/PageHeader.vue';
+import UiParentCard from '@/components/shared/UiParentCard.vue';
 import { paths } from '@/routes/paths';
+import { useRouter } from 'vue-router';
+import { ProgramaService } from '~/services/programa-service';
 import { PROGRAMA_BREADCRUMBS_NEW_EDIT } from './enums/programa-enums';
+import { useProgramaForm } from './resolvers/programa-resolver';
 
 const router = useRouter();
 const tipos = ['Música', 'Notícias', 'Entretenimento'];

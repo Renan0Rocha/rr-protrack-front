@@ -1,7 +1,7 @@
-import { useForm } from 'vee-validate';
+import { useField, useForm } from 'vee-validate';
 import * as yup from 'yup';
 
-const schema = yup.object({
+export const validationSchema = yup.object({
   nome: yup.string().required('Nome é obrigatório').min(5),
   sigla: yup.string().required('Sigla é obrigatória'),
   descricao: yup.string(),
@@ -14,18 +14,28 @@ const schema = yup.object({
 });
 
 export const useProgramaForm = () => {
-  return useForm({
-    validationSchema: schema,
-    initialValues: {
-      nome: '',
-      sigla: '',
-      descricao: '',
-      tipo: '',
-      horarioInicio: '',
-      horarioFim: '',
-      dataInicio: '',
-      dataFim: '',
-      status: ''
-    }
-  });
-}
+  const { handleSubmit } = useForm({ validationSchema });
+
+  const { value: nome, errorMessage: nomeErro } = useField<string>('nome');
+  const { value: sigla, errorMessage: siglaErro } = useField<string>('sigla');
+  const { value: descricao, errorMessage: descricaoErro } = useField<string>('descricao');
+  const { value: tipo, errorMessage: tipoErro } = useField<string>('tipo');
+  const { value: horarioInicio, errorMessage: horarioInicioErro } = useField<string>('horarioInicio');
+  const { value: horarioFim, errorMessage: horarioFimErro } = useField<string>('horarioFim');
+  const { value: dataInicio, errorMessage: dataInicioErro } = useField<string>('dataInicio');
+  const { value: dataFim, errorMessage: dataFimErro } = useField<string>('dataFim');
+  const { value: status, errorMessage: statusErro } = useField<string>('status');
+
+  return {
+    handleSubmit,
+    nome, nomeErro,
+    sigla, siglaErro,
+    descricao, descricaoErro,
+    tipo, tipoErro,
+    horarioInicio, horarioInicioErro,
+    horarioFim, horarioFimErro,
+    dataInicio, dataInicioErro,
+    dataFim, dataFimErro,
+    status, statusErro
+  };
+};

@@ -25,17 +25,23 @@ const sidebarItem: menu[] = [
     BgColor: 'primary',
     to: "/",
   },
-  
+  { header: 'Pessoas' },
+  {
+    title: 'Fornecedores',
+    icon: 'garage-outline',
+    BgColor: 'success',
+    to: paths.fornecedor.list
+  },
   { header: 'Programação' },
   {
     title: 'Programas',
-    icon: 'forbidden-circle-line-duotone',
+    icon: 'radio-minimalistic-linear',
     BgColor: 'success',
     to: paths.programa.list
   },
   {
     title: 'Ordem do Bloco',
-    icon: 'archive-check-line-duotone',
+    icon: 'bill-list-linear',
     chip: '9',
     BgColor: 'error',
     chipColor: 'error',
