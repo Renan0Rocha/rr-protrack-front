@@ -6,7 +6,7 @@ import { paths } from '@/routes/paths';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { FORNECEDOR_BREADCRUMBS_LIST, FORNECEDOR_TABLE_HEADERS } from './enums/fornecedor-enums';
-import { FornecedorService } from './services/fornecedor-service';
+import { FornecedorService } from '~/services/fornecedor-service';
 
 const router = useRouter();
 const fornecedores = ref<any[]>([]);
