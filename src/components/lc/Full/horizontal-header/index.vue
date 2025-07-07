@@ -73,20 +73,14 @@ watch(priority, (newPriority) => {
       <!-- ---------------------------------------------- -->
       <!-- ShoppingCart -->
       <!-- ---------------------------------------------- -->
-      <div class="hidden-sm-and-down me-sm-4 me-4">
-        <v-btn icon variant="text" class="mr-sm-3 mr-2 custom-hover-primary" to="" size="small">
-          <v-badge color="primary" content="0" offset-x="-4" offset-y="-6">
-            <Icon icon="solar:cart-3-line-duotone" height="24" width="24" />
-          </v-badge>
-        </v-btn>
-      </div>
+
 
       <!-- ---------------------------------------------- -->
       <!-- Notification -->
       <!-- ---------------------------------------------- -->
-      <div class="hidden-sm-and-down me-sm-6 me-4">
+      <!-- <div class="hidden-sm-and-down me-sm-6 me-4">
         <LcFullVerticalHeaderNotificationDD />
-      </div>
+      </div> -->
       <!-- ---------------------------------------------- -->
       <!-- User Profile -->
       <!-- ---------------------------------------------- -->
