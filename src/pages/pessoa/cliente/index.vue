@@ -8,34 +8,35 @@ import { useRouter } from 'vue-router';
 import { ClienteService } from '~/services/pessoa/cliente-service';
 import { CLIENTE_BREADCRUMBS_LIST, CLIENTE_TABLE_HEADERS } from './enums/cliente-enums';
 
+
 const router = useRouter();
-const fornecedores = ref<any[]>([]);
+const clientes = ref<any[]>([]);
 const loading = ref(true);
 
 const breadcrumbs = CLIENTE_BREADCRUMBS_LIST;
-const headers = CLIENTE_TABLE_HEADERS;
+const headers = CLIENTE_TABLE_HEADERS ;
 
 const carregarClientes = async () => {
   try {
     loading.value = true;
-    fornecedores.value = await ClienteService.findAll();
+    clientes.value = await ClienteService.findAll();
   } catch (error) {
-    console.error('Erro ao carregar fornecedores:', error);
+    console.error('Erro ao carregar clientes:', error);
   } finally {
     loading.value = false;
   }
 };
 
 const handleView = (id: number | string) => {
-  router.push(paths.pessoa.fornecedor.view(id.toString()));
+  router.push(paths.pessoa.cliente.view(id.toString()));
 };
 
 const handleEdit = (id: number | string) => {
-  router.push(paths.pessoa.fornecedor.edit(id.toString()));
+  router.push(paths.pessoa.cliente.edit(id.toString()));
 };
 
 const handleDelete = async (id: string | number) => {
-  if (!confirm('Deseja realmente excluir este fornecedor?')) return;
+  if (!confirm('Deseja realmente excluir este cliente?')) return;
 
   try {
     await ClienteService.delete(Number(id));
@@ -48,7 +49,7 @@ const handleDelete = async (id: string | number) => {
 };
 
 onMounted(() => {
-    carregarClientes();
+  carregarClientes();
 });
 </script>
 
@@ -59,13 +60,13 @@ onMounted(() => {
         title="Clientes"
         :breadcrumbs="breadcrumbs"
         button-label="Novo Cliente"
-        :button-to="paths.pessoa.fornecedor.new"
+        :button-to="paths.pessoa.cliente.new"
       />
 
       <UiParentCard title="Listagem de Clientes">
         <v-data-table
           :headers="headers"
-          :items="fornecedores"
+          :items="clientes"
           :loading="loading"
           loading-text="Carregando..."
           class="elevation-1"

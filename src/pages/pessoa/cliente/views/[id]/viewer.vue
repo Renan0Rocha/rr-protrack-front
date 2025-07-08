@@ -40,7 +40,7 @@ onMounted(async () => {
         :button-to="paths.pessoa.cliente.list"
       />
 
-      <UiParentCard title="Detalhes do Corpo Docente">
+      <UiParentCard title="Detalhes do Cliente">
         <v-skeleton-loader v-if="loading" type="paragraph, table" />
 
         <v-row v-else dense>

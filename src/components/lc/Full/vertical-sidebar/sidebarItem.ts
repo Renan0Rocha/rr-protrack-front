@@ -36,7 +36,7 @@ const sidebarItem: menu[] = [
     title: 'Vendedores',
     icon: 'user-id-linear',
     BgColor: 'success',
-    to: paths.pessoa.cliente.list
+    to: paths.pessoa.vendedor.list
   },
   {
     title: 'Fornecedores',
