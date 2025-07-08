@@ -3,7 +3,7 @@ import PageHeader from '@/components/shared/PageHeader.vue';
 import UiParentCard from '@/components/shared/UiParentCard.vue';
 import { paths } from '@/routes/paths';
 import { useRouter } from 'vue-router';
-import { ProgramaService } from '~/services/programa-service';
+import { ProgramaService } from '~/services/programacao/programa-service';
 import { PROGRAMA_BREADCRUMBS_NEW_EDIT } from './enums/programa-enums';
 import { useProgramaForm } from './resolvers/programa-resolver';
 
@@ -29,7 +29,7 @@ const onSubmit = handleSubmit(async (values) => {
   try {
     await ProgramaService.create(values);
     alert('Programa cadastrado com sucesso!');
-    router.push(paths.programa.list);
+    router.push(paths.programacao.programa.list);
   } catch (error) {
     alert('Erro ao cadastrar programa.');
     console.error(error);
@@ -44,7 +44,7 @@ const onSubmit = handleSubmit(async (values) => {
         title="Programas"
         :breadcrumbs="breadcrumbs"
         button-label="Lista de Programas"
-        :button-to="paths.programa.list"
+        :button-to="paths.programacao.programa.list"
       />
 
       <UiParentCard title="Cadastro de Programa">

@@ -1,4 +1,4 @@
-import { api } from './config-service';
+import { api } from '../config-service';
 
 export const ProgramaService = {
   async findAll() {

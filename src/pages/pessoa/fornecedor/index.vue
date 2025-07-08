@@ -5,8 +5,8 @@ import UiParentCard from '@/components/shared/UiParentCard.vue';
 import { paths } from '@/routes/paths';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { FornecedorService } from '~/services/pessoa/fornecedor-service';
 import { FORNECEDOR_BREADCRUMBS_LIST, FORNECEDOR_TABLE_HEADERS } from './enums/fornecedor-enums';
-import { FornecedorService } from '~/services/fornecedor-service';
 
 const router = useRouter();
 const fornecedores = ref<any[]>([]);
@@ -27,11 +27,11 @@ const carregarFornecedores = async () => {
 };
 
 const handleView = (id: number | string) => {
-  router.push(paths.fornecedor.view(id.toString()));
+  router.push(paths.pessoa.fornecedor.view(id.toString()));
 };
 
 const handleEdit = (id: number | string) => {
-  router.push(paths.fornecedor.edit(id.toString()));
+  router.push(paths.pessoa.fornecedor.edit(id.toString()));
 };
 
 const handleDelete = async (id: string | number) => {
@@ -59,7 +59,7 @@ onMounted(() => {
         title="Fornecedores"
         :breadcrumbs="breadcrumbs"
         button-label="Novo Fornecedor"
-        :button-to="paths.fornecedor.new"
+        :button-to="paths.pessoa.fornecedor.new"
       />
 
       <UiParentCard title="Listagem de Fornecedores">

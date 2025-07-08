@@ -27,17 +27,29 @@ const sidebarItem: menu[] = [
   },
   { header: 'Pessoas' },
   {
+    title: 'Clientes',
+    icon: 'users-group-rounded-linear',
+    BgColor: 'success',
+    to: paths.pessoa.cliente.list
+  },
+  {
+    title: 'Vendedores',
+    icon: 'user-id-linear',
+    BgColor: 'success',
+    to: paths.pessoa.cliente.list
+  },
+  {
     title: 'Fornecedores',
     icon: 'garage-outline',
     BgColor: 'success',
-    to: paths.fornecedor.list
+    to: paths.pessoa.fornecedor.list
   },
   { header: 'Programação' },
   {
     title: 'Programas',
     icon: 'radio-minimalistic-linear',
     BgColor: 'success',
-    to: paths.programa.list
+    to: paths.programacao.programa.list
   },
   {
     title: 'Ordem do Bloco',

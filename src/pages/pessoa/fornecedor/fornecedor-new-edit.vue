@@ -2,9 +2,9 @@
 import PageHeader from '@/components/shared/PageHeader.vue';
 import UiParentCard from '@/components/shared/UiParentCard.vue';
 import { paths } from '@/routes/paths';
-import { FornecedorService } from '@/services/fornecedor-service';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { FornecedorService } from '~/services/pessoa/fornecedor-service';
 import { FORNECEDOR_BREADCRUMBS_NEW_EDIT } from './enums/fornecedor-enums';
 import { useFornecedorForm } from './resolvers/fornecedor-resolver';
 
@@ -30,7 +30,7 @@ const onSubmit = handleSubmit(async (values) => {
   try {
     await FornecedorService.create(values);
     alert('Fornecedor cadastrado com sucesso!');
-    router.push(paths.fornecedor.list);
+    router.push(paths.pessoa.fornecedor.list);
   } catch (error) {
     alert('Erro ao cadastrar fornecedor.');
     console.error(error);
@@ -45,7 +45,7 @@ const onSubmit = handleSubmit(async (values) => {
         title="Fornecedores"
         :breadcrumbs="breadcrumbs"
         button-label="Lista de Fornecedores"
-        :button-to="paths.fornecedor.list"
+        :button-to="paths.pessoa.fornecedor.list"
       />
 
       <UiParentCard title="Cadastro de Fornecedor">

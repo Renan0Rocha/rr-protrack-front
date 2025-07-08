@@ -4,7 +4,7 @@ import UiParentCard from '@/components/shared/UiParentCard.vue';
 import { paths } from '@/routes/paths';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { ProgramaService } from '~/services/programa-service';
+import { ProgramaService } from '~/services/programacao/programa-service';
 
 const route = useRoute();
 const id = Number(route.params.id);
@@ -14,7 +14,7 @@ const loading = ref(true);
 
 const breadcrumbs = [
   { title: 'Dashboard', disabled: false, href: paths.dashboard },
-  { title: 'Programas', disabled: false, href: paths.programa.list },
+  { title: 'Programas', disabled: false, href: paths.programacao.programa.list },
   { title: 'Visualizar', disabled: true },
 ];
 
@@ -37,7 +37,7 @@ onMounted(async () => {
         title="Visualização do Programa"
         :breadcrumbs="breadcrumbs"
         button-label="Voltar"
-        :button-to="paths.programa.list"
+        :button-to="paths.programacao.programa.list"
       />
 
       <UiParentCard title="Detalhes do Programa">
