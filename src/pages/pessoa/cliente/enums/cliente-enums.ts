@@ -1,12 +1,12 @@
-import { paths } from '@/routes/paths';
+import { paths } from '~/routes/paths';
 
 export const CLIENTE_BREADCRUMBS_LIST = [
-  { title: 'Dashboard', disabled: false, href: paths.dashboard },
+  { title: 'Início', disabled: false, href: paths.dashboard },
   { title: 'Clientes', disabled: true },
 ];
 
 export const CLIENTE_BREADCRUMBS_NEW_EDIT = [
-  { title: 'Dashboard', disabled: false, href: paths.dashboard },
+  { title: 'Início', disabled: false, href: paths.dashboard },
   { title: 'Clientes', disabled: false, href: paths.pessoa.cliente.list },
   { title: 'Cadastrar', disabled: true },
 ];

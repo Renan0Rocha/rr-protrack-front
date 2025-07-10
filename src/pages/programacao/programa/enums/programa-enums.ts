@@ -1,10 +1,12 @@
+import { paths } from '@/routes/paths';
+
 export const PROGRAMA_BREADCRUMBS_LIST = [
-    { title: 'Dashboard', disabled: false, href: '/dashboard' },
+    { title: 'Início', disabled: false, href: paths.dashboard },
     { title: 'Programas', disabled: true }
   ];
   
   export const PROGRAMA_BREADCRUMBS_NEW_EDIT = [
-    { title: 'Dashboard', disabled: false, href: '/dashboard' },
+    { title: 'Início', disabled: false, href: paths.dashboard },
     { title: 'Programas', disabled: false, href: '/programa' },
     { title: 'Cadastro', disabled: true }
   ];

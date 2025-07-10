@@ -13,7 +13,7 @@ const cliente = ref<any | null>(null);
 const loading = ref(true);
 
 const breadcrumbs = [
-  { title: 'Dashboard', disabled: false, href: paths.dashboard },
+  { title: 'Início', disabled: false, href: paths.dashboard },
   { title: 'Cliente', disabled: false, href: paths.pessoa.cliente.list },
   { title: 'Visualizar', disabled: true },
 ];

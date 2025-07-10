@@ -1,10 +1,12 @@
+import { paths } from '@/routes/paths';
+
 export const FORNECEDOR_BREADCRUMBS_LIST = [
-    { title: 'Dashboard', disabled: false, href: '/dashboard' },
+    { title: 'Início', disabled: false, href: paths.dashboard },
     { title: 'Fornecedores', disabled: true }
   ];
   
   export const FORNECEDOR_BREADCRUMBS_NEW_EDIT = [
-    { title: 'Dashboard', disabled: false, href: '/dashboard' },
+    { title: 'Início', disabled: false, href: paths.dashboard },
     { title: 'Fornecedores', disabled: false, href: '/fornecedores' },
     { title: 'Cadastro', disabled: true }
   ];

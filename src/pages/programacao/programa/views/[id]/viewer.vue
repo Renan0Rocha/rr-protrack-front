@@ -13,7 +13,7 @@ const programa = ref<any | null>(null);
 const loading = ref(true);
 
 const breadcrumbs = [
-  { title: 'Dashboard', disabled: false, href: paths.dashboard },
+  { title: 'Início', disabled: false, href: paths.dashboard },
   { title: 'Programas', disabled: false, href: paths.programacao.programa.list },
   { title: 'Visualizar', disabled: true },
 ];
