@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useVendedorResolverDadosGerais } from '@/modules/pessoa/vendedor/resolvers';
 import { defineEmits, defineProps } from 'vue';
+import { useVendedorResolverDadosGerais } from './resolvers';
 
 const emit = defineEmits<{
   (e: 'submit',values: Record<string, any>): void;

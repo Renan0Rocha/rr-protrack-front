@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useProgramaResolverDadosGerais } from '@/modules/programacao/programa/resolvers';
 import { defineEmits, defineProps } from 'vue';
 import { DIAS_SEMANA_OPTIONS } from './enums/programa-enums';
+import { useProgramaResolverDadosGerais } from './resolvers';
 
 const emit = defineEmits<{
   (e: 'submit', values: Record<string, any>): void;
