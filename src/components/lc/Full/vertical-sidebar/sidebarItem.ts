@@ -38,12 +38,6 @@ const sidebarItem: menu[] = [
     BgColor: 'success',
     to: paths.pessoa.vendedor.list
   },
-  {
-    title: 'Fornecedores',
-    icon: 'garage-outline',
-    BgColor: 'success',
-    to: paths.pessoa.fornecedor.list
-  },
   { header: 'Programação' },
   {
     title: 'Programas',

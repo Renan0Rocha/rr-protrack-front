@@ -1,0 +1,38 @@
+<script setup lang="ts">
+import PageHeader from '@/components/shared/PageHeader.vue';
+import { paths } from '@/routes/paths';
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { VendedorService } from '~/services/pessoa/vendedor-service';
+
+interface Vendedor {
+  id: number;
+  nome: string;
+}
+
+const route = useRoute();
+const id = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id ?? '';
+
+const currentData = ref<Vendedor | null>(null);
+
+onMounted(async () => {
+  if (!id) return;
+
+  try {
+    currentData.value = await VendedorService.findOneById(id);
+  } catch (error) {
+    console.error('Erro ao buscar vendedor:', error);
+  }
+});
+</script>
+
+<template>
+  <PageHeader
+    title="Editar Vendedor"
+    :breadcrumbs="[
+      { title: 'Início', href: '/', disabled: false },
+      { title: 'Vendedores', href: paths.pessoa.vendedor.list, disabled: false },
+      { title: currentData?.nome || '...', disabled: true }
+    ]"
+  />
+</template>

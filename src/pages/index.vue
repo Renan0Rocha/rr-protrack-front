@@ -6,7 +6,6 @@ import UiParentCard from '@/components/shared/UiParentCard.vue';
   <v-row>
     <v-col cols="12" md="12">
       <UiParentCard >
-
         <div class="d-flex justify-center mt-4">
             <v-img
                 src="/images/backgrounds/PaginaInicial.svg"
