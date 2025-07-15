@@ -1,12 +1,12 @@
 import { paths } from '@/routes/paths';
 
 export const VENDEDOR_BREADCRUMBS_LIST = [
-  { title: 'Dashboard', disabled: false, href: paths.dashboard },
+  { title: 'Início', disabled: false, href: paths.dashboard },
   { title: 'Vendedores', disabled: true },
 ];
 
 export const VENDEDOR_BREADCRUMBS_NEW_EDIT = [
-  { title: 'Dashboard', disabled: false, href: paths.dashboard },
+  { title: 'Início', disabled: false, href: paths.dashboard },
   { title: 'Vendedores', disabled: false, href: paths.pessoa.vendedor.list },
   { title: 'Cadastrar', disabled: true },
 ];

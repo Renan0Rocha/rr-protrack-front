@@ -1,4 +1,4 @@
-import { paths } from '@/routes/paths';
+import { paths } from '~/routes/paths';
 
 export const CLIENTE_BREADCRUMBS_LIST = [
   { title: 'Início', disabled: false, href: paths.dashboard },
