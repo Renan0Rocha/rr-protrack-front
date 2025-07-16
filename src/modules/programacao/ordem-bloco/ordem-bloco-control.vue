@@ -15,11 +15,13 @@
           </template>
         </v-menu>
 
-        <v-text-field
+        <v-select
           v-model="selectedTime"
+          :items="timeOptions"
           label="Horário"
-          type="time"
-          style="max-width: 100px; margin-left: 16px;"
+          style="max-width: 105px; margin-left: 16px;"
+          dense
+          outlined
         />
       </div>
 
@@ -61,6 +63,12 @@ interface ContratoItem {
 
 const selectedDate = ref<string>(new Date().toISOString().substr(0, 10));
 const selectedTime = ref<string>('12:00');
+
+const timeOptions = Array.from({ length: 96 }, (_, i) => {
+  const hours = Math.floor(i * 15 / 60).toString().padStart(2, '0');
+  const minutes = (i * 15 % 60).toString().padStart(2, '0');
+  return `${hours}:${minutes}`;
+});
 
 const contratos = ref<ContratoItem[]>([
   { id: 1, empresa: 'Banco Sicobb', descricao: 'Anúncio semana sicobb evento beneficente', tempo: '00:30', numeroOrdem: 1 },
