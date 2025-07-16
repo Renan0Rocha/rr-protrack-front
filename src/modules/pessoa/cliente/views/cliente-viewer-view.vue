@@ -17,7 +17,7 @@
           <strong>Nome:</strong> {{ cliente?.nome }}
         </v-col>
         <v-col cols="12" md="6">
-          <strong>CPF/CNPJ:</strong> {{ cliente?.cpfCnpj }}
+          <strong>CPF:</strong> {{ cliente?.cpf }}
         </v-col>
         <v-col cols="12" md="6">
           <strong>Telefone:</strong> {{ cliente?.telefone }}
@@ -59,7 +59,7 @@ import { ClienteService } from '~/services/pessoa/cliente-service';
 interface Cliente {
   id: string;
   nome: string;
-  cpfCnpj: string;
+  cpf: string;
   telefone: string;
     vendedor?: {
         id: string;

@@ -2,7 +2,7 @@
 import UiParentCard from '@/components/shared/UiParentCard.vue';
 import { paths } from '@/routes/paths';
 import { ClienteService } from '@/services/pessoa/cliente-service';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import ClienteFormDadosGerais from './cliente-form-dados-gerais.vue';
 import ClienteFormEndereco from './cliente-form-endereco.vue';
@@ -13,21 +13,23 @@ const props = defineProps<{
   isEdit?: boolean;
 }>();
 
-const current = ref<Record<string, any> | null>(props.currentData ?? null);
+const router = useRouter();
+const route = useRoute();
+const id = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id ?? '';
 const isEdit = props.isEdit ?? false;
 const loading = ref(false);
+
 const showSnackbar    = ref(false);
 const snackbarMessage = ref('');
-const snackbarColor = ref<'success' | 'error'>('success');
+const snackbarColor   = ref<'success' | 'error'>('success');
 
 watch(
   () => props.currentData,
   (newVal) => {
-    current.value = newVal;
+    // sempre manter current as props.currentData
   },
   { immediate: true }
 );
-
 
 function notify(message: string, color: 'success'|'error' = 'success') {
   snackbarMessage.value = message;
@@ -36,14 +38,9 @@ function notify(message: string, color: 'success'|'error' = 'success') {
 }
 
 const currentTab = ref<'dadosGerais'|'endereco'>('dadosGerais');
-const router     = useRouter();
-const route      = useRoute();
-
-const id = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id ?? '';
-const currentData = ref<any>(null);
 
 const sessionKey = 'clienteForm';
-const session = (key: string, value?: any) => {
+function session(key: string, value?: any) {
   const all = JSON.parse(sessionStorage.getItem(sessionKey) || '{}');
   if (value !== undefined) {
     all[key] = value;
@@ -51,15 +48,28 @@ const session = (key: string, value?: any) => {
   } else {
     return all[key] || {};
   }
-};
-const clearSession = () => sessionStorage.removeItem(sessionKey);
+}
+function clearSession() {
+  sessionStorage.removeItem(sessionKey);
+}
 
 onMounted(async () => {
+  // ao entrar na tela de cadastro
+  if (!id) {
+    clearSession();
+  }
   if (id) {
     try {
-      currentData.value = await ClienteService.findOneById(id);
-      session('dadosGerais', currentData.value);
-      session('endereco', currentData.value);
+      const data = await ClienteService.findOneById(id);
+      // popular session para edição
+      session('dadosGerais', {
+        nome: data.nome,
+        cpf:  data.cpf,
+        dataNasc: data.dataNascimento,
+        telefone: data.telefone,
+        vendedor: { id: data.vendedor.id, nome: data.vendedor.nome }
+      });
+      session('endereco', data.endereco);
     } catch (error) {
       console.error('Erro ao buscar cliente:', error);
     }
@@ -69,45 +79,34 @@ onMounted(async () => {
 const finalizeForm = async () => {
   try {
     loading.value = true;
-
-    
-    const sessionData = JSON.parse(sessionStorage.getItem(sessionKey) || '{}');
-
+    const sess = JSON.parse(sessionStorage.getItem(sessionKey) || '{}');
     const payload = {
-      nome:     sessionData.dadosGerais.nome,
-      cpf:      sessionData.dadosGerais.cpf,
-      dataNasc: sessionData.dadosGerais.dataNasc,
-      telefone: sessionData.dadosGerais.telefone,        
-      vendedorId: Number(sessionData.dadosGerais.vendedor.id),
-      ...sessionData.endereco 
+      nome:       sess.dadosGerais.nome,
+      cpf:        sess.dadosGerais.cpf,
+      dataNasc:   sess.dadosGerais.dataNasc,
+      telefone:   sess.dadosGerais.telefone,
+      vendedorId: Number(sess.dadosGerais.vendedor.id),
+      ...sess.endereco
     };
-
     if (id) {
-      // UPDATE recebe o objeto DTO diretamente
       await ClienteService.update(id, payload);
       notify('Cliente atualizado com sucesso!', 'success');
     } else {
-      // CREATE idem
       await ClienteService.create(payload);
       notify('Cliente cadastrado com sucesso!', 'success');
     }
-
     clearSession();
     setTimeout(() => router.push(paths.pessoa.cliente.list), 1500);
   } catch (err) {
     console.error(err);
-    notify('Erro ao salvar cliente', 'error');
+    notify('Erro ao salvar cliente','error');
   } finally {
     loading.value = false;
   }
 };
-
-
 </script>
 
 <template>
-  
-
   <v-row>
     <v-col cols="12">
       <UiParentCard :title="id ? 'Editar Cliente' : 'Cadastro de Cliente'">
@@ -119,23 +118,15 @@ const finalizeForm = async () => {
         <div v-if="currentTab === 'dadosGerais'">
           <ClienteFormDadosGerais
             :initial-data="session('dadosGerais')"
-            @next="data => {
-              session('dadosGerais', data);
-              currentTab = 'endereco';
-            }"
+            @next="data => { session('dadosGerais', data); currentTab = 'endereco'; }"
           />
         </div>
+
         <div v-else>
           <ClienteFormEndereco
             :initial-data="session('endereco')"
-            @back="data => {
-              session('endereco', data);
-              currentTab = 'dadosGerais';
-            }"
-            @submit="data => {
-              session('endereco', data);
-              finalizeForm();
-            }"
+            @back="data => { session('endereco', data); currentTab = 'dadosGerais'; }"
+            @submit="data => { session('endereco', data); finalizeForm(); }"
           />
         </div>
       </UiParentCard>
