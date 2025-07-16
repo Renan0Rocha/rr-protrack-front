@@ -61,12 +61,8 @@ const sidebarItem: menu[] = [
   {
     title: 'Ordem do Bloco',
     icon: 'bill-list-linear',
-    chip: '9',
-    BgColor: 'error',
-    chipColor: 'error',
-    chipBgColor: 'error',
-    chipVariant: 'flat',
-    to: '/auth/404'
+    BgColor: 'success',
+    to: paths.programacao.ordemBloco.list
   }
 ];
 

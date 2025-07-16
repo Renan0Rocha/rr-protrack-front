@@ -25,9 +25,6 @@ export const paths = {
     },
     ordemBloco: {
       list: '/programacao/ordem-bloco',
-      new: '/programacao/ordem-bloco/views/ordem-bloco-new',
-      edit: (id: string | number) => `/programacao/ordem-bloco/views/${id}`,
-      view: (id: string | number) => `/programacao/ordem-bloco/views/${id}/viewer`,
     },
     insercao: {
       list: '/programacao/insercao',
