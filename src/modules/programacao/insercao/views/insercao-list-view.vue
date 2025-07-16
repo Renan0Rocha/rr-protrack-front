@@ -67,7 +67,7 @@ onMounted(() => {
       button-label="Nova Inserção"
     />
 
-    <UiParentCard title="Listagem de Inserções">
+    <UiParentCard >
       <v-data-table
         :headers="headers"
         :items="insercoes"

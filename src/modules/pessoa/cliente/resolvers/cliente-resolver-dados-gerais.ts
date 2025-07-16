@@ -3,8 +3,8 @@ import * as yup from 'yup';
 
 export const clienteResolverDadosGerais = yup.object({
   nome: yup.string().required('Nome é obrigatório'),
-  cpfCnpj: yup.string().required('CPF/CNPJ é obrigatório'),
-  dataNascimento: yup.string().required('Data de nascimento é obrigatório'),
+  cpf: yup.string().required('CPF é obrigatório'),
+  dataNasc: yup.string().required('Data de nascimento é obrigatório'),
   vendedor: yup.object({
     id: yup.string().required('Vendedor é obrigatório'),
     nome: yup.string().required('Nome do vendedor é obrigatório'),
@@ -13,14 +13,14 @@ export const clienteResolverDadosGerais = yup.object({
 
 export function useClienteResolverDadosGerais(currentData: {
   nome?: string;
-  cpfCnpj?: string;
-  dataNascimento?: string;
+  cpf?: string;
+  dataNasc?: string;
   vendedor?: { id: string; nome: string };
 } = {}) {
   const initialValues = {
     nome: currentData.nome ?? '',
-    cpfCnpj: currentData.cpfCnpj ?? '',
-    dataNascimento: currentData.dataNascimento ?? '',
+    cpf: currentData.cpf ?? '',
+    dataNasc: currentData.dataNasc ?? '',
     vendedor: {
       id:   currentData.vendedor?.id   ?? '',
       nome: currentData.vendedor?.nome ?? '',
@@ -33,16 +33,16 @@ export function useClienteResolverDadosGerais(currentData: {
   });
 
   const { value: nome,           errorMessage: nomeErro           } = useField<string>('nome');
-  const { value: cpfCnpj,        errorMessage: cpfCnpjErro        } = useField<string>('cpfCnpj');
-  const { value: dataNascimento, errorMessage: dataNascimentoErro } = useField<string>('dataNascimento');
+  const { value: cpf,            errorMessage: cpfErro            } = useField<string>('cpf');
+  const { value: dataNasc, errorMessage: dataNascErro } = useField<string>('dataNasc');
   const { value: vendedorId,   errorMessage: vendedorIdErro   } = useField<string>('vendedor.id');
   const { value: vendedorNome, errorMessage: vendedorNomeErro } = useField<string>('vendedor.nome');
 
   return {
     handleSubmit,
     nome, nomeErro,
-    cpfCnpj, cpfCnpjErro,
-    dataNascimento, dataNascimentoErro,
+    cpf, cpfErro,
+    dataNasc, dataNascErro,
     vendedorId,   vendedorIdErro,
     vendedorNome, vendedorNomeErro,
   };

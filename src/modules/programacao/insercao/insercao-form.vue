@@ -5,7 +5,6 @@ import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import InsercaoFormDadosGerais from './insercao-form-dados-gerais.vue';
 
-// Props recebidas do componente pai
 const props = defineProps<{
   currentId?: string | number;
   currentData?: Record<string, any> | null;

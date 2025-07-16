@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { formatMMSS } from '@/utils/format-data/format-date';
-import { formatMoney, parseMoney } from '@/utils/format-data/format-money';
 import { defineEmits, defineProps } from 'vue';
 import { useInsercaoResolverDadosGerais } from './resolvers';
 
@@ -54,16 +53,16 @@ const onSubmit = handleSubmit(values => {
       </v-col>
 
       <v-col cols="12" md="6">
-        <v-text-field
-          :model-value="formatMoney(valor || 0)"
-          label="Valor"
-          outlined
-          @input="e => {
-            const num = parseMoney(e.target.value);
-            valor.value = isNaN(num) ? 0 : parseFloat(num.toFixed(2));
-          }"
-          :error-messages="valorErro ? [valorErro] : []"
-        />
+       <v-text-field
+        v-model.number="valor"
+        type="number"
+        label="Valor"
+        outlined
+        step="0.01"
+        min="0"
+        :error-messages="valorErro ? [valorErro] : []"
+      />
+
       </v-col>
     </v-row>
 

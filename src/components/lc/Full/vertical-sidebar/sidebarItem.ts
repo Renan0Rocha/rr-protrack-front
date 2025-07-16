@@ -38,6 +38,13 @@ const sidebarItem: menu[] = [
     BgColor: 'success',
     to: paths.pessoa.vendedor.list
   },
+  { header: 'Gestão' },
+  {
+    title: 'Contratos',
+    icon: 'clipboard-text-linear',
+    BgColor: 'success',
+    to: paths.programacao.contrato.list
+  },
   { header: 'Programação' },
   {
     title: 'Programas',
@@ -47,7 +54,7 @@ const sidebarItem: menu[] = [
   },
   {
     title: 'Inserções',
-    icon: 'radio-minimalistic-linear',
+    icon: 'play-circle-linear',
     BgColor: 'success',
     to: paths.programacao.insercao.list
   },

@@ -13,7 +13,7 @@ export const CLIENTE_BREADCRUMBS_NEW_EDIT = [
 
 export const CLIENTE_TABLE_HEADERS = [
   { title: 'Nome', key: 'nome' },
-  { title: 'CPF/CNPJ', key: 'cpfCnpj' }, 
+  { title: 'CPF', key: 'cpf' }, 
   { title: 'Telefone', key: 'telefone' },
   { title: 'Cep', key: 'endereco.cep' },
   { title: 'Cidade', key: 'endereco.cidade' },

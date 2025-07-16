@@ -35,5 +35,11 @@ export const paths = {
       edit: (id: string | number) => `/programacao/insercao/${id}/edit`,
       view: (id: string | number) => `/programacao/insercao/${id}/viewer`,
     },
+    contrato: {
+      list: '/programacao/contrato',
+      new:  '/programacao/contrato/new',
+      edit: (id: string | number) => `/programacao/contrato/${id}/edit`,
+      view: (id: string | number) => `/programacao/contrato/${id}/viewer`,
+    },
   }
 };

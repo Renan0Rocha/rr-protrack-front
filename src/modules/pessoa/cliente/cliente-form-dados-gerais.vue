@@ -3,17 +3,17 @@ import { useClienteResolverDadosGerais } from '@/modules/pessoa/cliente/resolver
 import { onMounted, ref, watch } from 'vue';
 import { VendedorService } from '~/services/pessoa/vendedor-service';
 
+const props = defineProps<{ initialData?: Record<string, any> }>();
+
 const emit = defineEmits<{
   (e: 'next', values: Record<string, any>): void
 }>();
 
-const props = defineProps<{ initialData?: Record<string, any> }>();
-
 const {
   handleSubmit,
   nome, nomeErro,
-  cpfCnpj, cpfCnpjErro,
-  dataNascimento, dataNascimentoErro,
+  cpf, cpfErro,
+  dataNasc, dataNascErro,
   vendedorId,   vendedorIdErro,
   vendedorNome, vendedorNomeErro,
 } = useClienteResolverDadosGerais(props.initialData ?? {});
@@ -62,20 +62,20 @@ const onSubmit = handleSubmit(values => {
 
       <v-col cols="12" md="6">
         <v-text-field
-          v-model="cpfCnpj"
-          label="CPF/CNPJ"
+          v-model="cpf"
+          label="CPF"
           outlined
-          :error-messages="cpfCnpjErro ? [cpfCnpjErro] : []"
+          :error-messages="cpfErro ? [cpfErro] : []"
         />
       </v-col>
 
       <v-col cols="12" md="6">
         <v-text-field
-          v-model="dataNascimento"
+          v-model="dataNasc"
           label="Data de Nascimento"
           type="date"
           outlined
-          :error-messages="dataNascimentoErro ? [dataNascimentoErro] : []"
+          :error-messages="dataNascErro ? [dataNascErro] : []"
         />
       </v-col>
 

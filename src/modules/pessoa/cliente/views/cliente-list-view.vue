@@ -58,7 +58,7 @@ onMounted(() => {
 <template>
   <div>
     <PageHeader
-      title="Clientes"
+      title="Listagem de Clientes"
       :breadcrumbs="[
         { title: 'Início', href: '/', disabled: false },
         { title: 'Clientes', disabled: true }
@@ -67,7 +67,7 @@ onMounted(() => {
       button-label="Novo Cliente"
     />
 
-    <UiParentCard title="Listagem de Clientes">
+    <UiParentCard>
       <v-data-table
         :headers="headers"
         :items="clientes"

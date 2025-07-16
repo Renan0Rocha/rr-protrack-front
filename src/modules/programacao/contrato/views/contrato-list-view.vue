@@ -7,47 +7,47 @@ import TableActions from '@/components/shared/TableActions.vue';
 import UiParentCard from '@/components/shared/UiParentCard.vue';
 
 import { paths } from '@/routes/paths';
-import { VendedorService } from '~/services/pessoa/vendedor-service';
-import { VENDEDOR_TABLE_HEADERS } from "../enums/vendedor-enums";
+import { ContratoService } from '~/services/programacao/contrato-service';
+import { CONTRATO_TABLE_HEADERS } from "../enums/contrato-enums";
 
 const router = useRouter();
-const vendedores = ref<any[]>([]);
+const contratos = ref<any[]>([]);
 const loading = ref(true);
 
-const headers = VENDEDOR_TABLE_HEADERS;
+const headers = CONTRATO_TABLE_HEADERS;
 
-const carregarVendedores = async () => {
+const carregarContratos = async () => {
   try {
     loading.value = true;
-    vendedores.value = await VendedorService.findAll();
+    contratos.value = await ContratoService.findAll();
   } catch (error) {
-    console.error('Erro ao carregar vendedores:', error);
+    console.error('Erro ao carregar contratos:', error);
   } finally {
     loading.value = false;
   }
 };
 
 function handleDelete(id: string | number): void {
-  if (!confirm('Deseja realmente excluir este vendedor?')) {
+  if (!confirm('Deseja realmente excluir este contrato?')) {
     return;
   }
-  VendedorService.delete(id)
+  ContratoService.delete(id)
     .then(() => {
-      alert('Vendedor excluído com sucesso!');
-      carregarVendedores();
+      alert('Contrato excluído com sucesso!');
+      carregarContratos();
     })
     .catch(err => {
-      console.error('Erro ao excluir vendedor:', err);
-      alert('Erro ao excluir vendedor.');
+      console.error('Erro ao excluir contrato:', err);
+      alert('Erro ao excluir contrato.');
     });
 }
 
 function handleView(id: string | number): void {
-  router.push(paths.pessoa.vendedor.view(String(id)));
+  router.push(paths.programacao.contrato.view(String(id)));
 }
 
 function handleEdit(id: string | number): void {
-  router.push(paths.pessoa.vendedor.edit(String(id)));
+  router.push(paths.programacao.contrato.edit(String(id)));
 }
 
 function formatDateBR(date: string | null): string {
@@ -57,37 +57,39 @@ function formatDateBR(date: string | null): string {
 }
 
 onMounted(() => {
-  carregarVendedores();
+  carregarContratos();
 });
 </script>
 
 <template>
   <div>
     <PageHeader
-      title="Listagem de Vendedores"
+      title="Listagem de Contratos"
       :breadcrumbs="[
         { title: 'Início', href: '/', disabled: false },
-        { title: 'Vendedores', disabled: true }
+        { title: 'Contratos', disabled: true }
       ]"
-      :button-to="paths.pessoa.vendedor.new"
-      button-label="Novo Vendedor"
+      :button-to="paths.programacao.contrato.new"
+      button-label="Novo Contrato"
     />
 
     <UiParentCard>
       <v-data-table
         :headers="headers"
-        :items="vendedores"
+        :items="contratos"
         :loading="loading"
         loading-text="Carregando..."
         class="elevation-1"
         item-value="id"
       >
-      <template #item.vinculo="{ item }">
-  {{ item.vinculo || 'Não informado' }}
+      <template #item.dataInicio="{ item }">
+  {{ formatDateBR(item.dataInicio) }}
 </template>
-
-<template #item.dataNascimento="{ item }">
-  {{ formatDateBR(item.dataNascimento) }}
+      <template #item.dataFim="{ item }">
+  {{ formatDateBR(item.dataFim) }}
+</template>
+      <template #item.valorTotal="{ item }">
+  {{ item.valorTotal ? `R$ ${item.valorTotal.toFixed(2).replace('.', ',')}` : '-' }}
 </template>
       <template #item.actions="{ item }">
         <TableActions

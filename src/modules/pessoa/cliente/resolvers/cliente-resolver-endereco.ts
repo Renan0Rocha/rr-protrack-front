@@ -22,7 +22,7 @@ export function useClienteResolverEndereco(currentData: {
     estado?: string;
   };
 } = {}) {
-  // agora inicializa ANINHADO em `endereco`
+
   const initialValues = {
     endereco: {
       cep:        currentData.endereco?.cep        ?? '',
@@ -39,7 +39,6 @@ export function useClienteResolverEndereco(currentData: {
     initialValues,
   });
 
-  // campos continuam usando "endereco.campo"
   const { value: cep,        errorMessage: cepErro        } = useField<string>('endereco.cep');
   const { value: bairro,     errorMessage: bairroErro     } = useField<string>('endereco.bairro');
   const { value: logradouro, errorMessage: logradouroErro } = useField<string>('endereco.logradouro');

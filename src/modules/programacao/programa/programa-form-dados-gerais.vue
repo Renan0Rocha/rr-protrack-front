@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { defineEmits, defineProps } from 'vue';
-import { DIAS_SEMANA_OPTIONS } from './enums/programa-enums';
 import { useProgramaResolverDadosGerais } from './resolvers';
 
 const emit = defineEmits<{
@@ -13,18 +12,17 @@ const props = defineProps<{
 
 const {
   handleSubmit,
-  nome, nomeErro,
-  sigla, siglaErro,
-  duracao, duracaoErro,
-  dias_semana, diasSemanaErro,
-  data_inicial, dataInicialErro,
-  data_final, dataFinalErro,
-  horario_inicial, horarioInicialErro,
-  horario_final, horarioFinalErro,
+  Nome, nomeErro,
+  Sigla, siglaErro,
+  Duracao, duracaoErro,
+  DiasSemana, diasSemanaErro,
+  DataInicial, dataInicialErro,
+  DataFinal, dataFinalErro,
+  HorarioInicio, horarioInicialErro,
+  HorarioFim, horarioFinalErro,
 } = useProgramaResolverDadosGerais(props.initialData ?? {});
 
 const onSubmit = handleSubmit((values) => {
-  console.log('SUBMIT PROGRAM FORM', values);
   emit('submit', values);
 });
 </script>
@@ -34,7 +32,7 @@ const onSubmit = handleSubmit((values) => {
     <v-row dense>
       <v-col cols="12" md="6">
         <v-text-field
-          v-model="nome"
+          v-model="Nome"
           label="Nome"
           outlined
           :error-messages="nomeErro ? [nomeErro] : []"
@@ -43,7 +41,7 @@ const onSubmit = handleSubmit((values) => {
 
       <v-col cols="12" md="6">
         <v-text-field
-          v-model="sigla"
+          v-model="Sigla"
           label="Sigla"
           outlined
           :error-messages="siglaErro ? [siglaErro] : []"
@@ -52,7 +50,7 @@ const onSubmit = handleSubmit((values) => {
 
       <v-col cols="12" md="6">
         <v-text-field
-          v-model="duracao"
+          v-model="Duracao"
           label="Duração"
           type="time"
           outlined
@@ -62,14 +60,12 @@ const onSubmit = handleSubmit((values) => {
 
       <v-col cols="12" md="6">
         <v-combobox
-          v-model="dias_semana"
+          v-model="DiasSemana"
           multiple
           chips
           clearable
           label="Dias da Semana"
-          :items="DIAS_SEMANA_OPTIONS"
-          item-title="label"
-          item-value="value"
+          :items="['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']"
           outlined
           :error-messages="diasSemanaErro ? [diasSemanaErro] : []"
         />
@@ -77,7 +73,7 @@ const onSubmit = handleSubmit((values) => {
 
       <v-col cols="12" md="6">
         <v-text-field
-          v-model="data_inicial"
+          v-model="DataInicial"
           label="Data Inicial"
           type="date"
           outlined
@@ -87,7 +83,7 @@ const onSubmit = handleSubmit((values) => {
 
       <v-col cols="12" md="6">
         <v-text-field
-          v-model="data_final"
+          v-model="DataFinal"
           label="Data Final"
           type="date"
           outlined
@@ -97,7 +93,7 @@ const onSubmit = handleSubmit((values) => {
 
       <v-col cols="12" md="6">
         <v-text-field
-          v-model="horario_inicial"
+          v-model="HorarioInicio"
           label="Horário Inicial"
           type="time"
           outlined
@@ -107,7 +103,7 @@ const onSubmit = handleSubmit((values) => {
 
       <v-col cols="12" md="6">
         <v-text-field
-          v-model="horario_final"
+          v-model="HorarioFim"
           label="Horário Final"
           type="time"
           outlined
