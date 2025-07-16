@@ -78,10 +78,7 @@ const finalizeForm = async () => {
       cpf:      sessionData.dadosGerais.cpf,
       dataNasc: sessionData.dadosGerais.dataNasc,
       telefone: sessionData.dadosGerais.telefone,        
-      vendedor: {
-        id:   Number(sessionData.dadosGerais.vendedor.id),
-        nome: sessionData.dadosGerais.vendedor.nome
-      },
+      vendedorId: Number(sessionData.dadosGerais.vendedor.id),
       ...sessionData.endereco 
     };
 

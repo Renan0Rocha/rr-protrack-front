@@ -18,10 +18,11 @@ const props = defineProps<{
           v-bind="tooltip"
           icon
           size="small"
+          variant="tonal"
           color="info"
           @click="() => props.onView?.(props.id)"
         >
-          <v-icon>mdi-eye</v-icon>
+           <v-icon>mdi-eye-outline</v-icon>
         </v-btn>
       </template>
     </v-tooltip>
@@ -33,10 +34,11 @@ const props = defineProps<{
           v-bind="tooltip"
           icon
           size="small"
+          variant="tonal"
           color="warning"
           @click="() => props.onEdit?.(props.id)"
         >
-          <v-icon>mdi-pencil</v-icon>
+          <v-icon>mdi-pencil-outline</v-icon>
         </v-btn>
       </template>
     </v-tooltip>
@@ -48,10 +50,11 @@ const props = defineProps<{
           v-bind="tooltip"
           icon
           size="small"
+          variant="tonal"
           color="error"
           @click="() => props.onDelete?.(props.id)"
         >
-          <v-icon>mdi-delete</v-icon>
+          <v-icon>mdi-trash-can-outline</v-icon>
         </v-btn>
       </template>
     </v-tooltip>
