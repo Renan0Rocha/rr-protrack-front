@@ -28,6 +28,12 @@ export const paths = {
       new: '/programacao/ordem-bloco/views/ordem-bloco-new',
       edit: (id: string | number) => `/programacao/ordem-bloco/views/${id}`,
       view: (id: string | number) => `/programacao/ordem-bloco/views/${id}/viewer`,
-    }
+    },
+    insercao: {
+      list: '/programacao/insercao',
+      new:  '/programacao/insercao/new',
+      edit: (id: string | number) => `/programacao/insercao/${id}/edit`,
+      view: (id: string | number) => `/programacao/insercao/${id}/viewer`,
+    },
   }
 };

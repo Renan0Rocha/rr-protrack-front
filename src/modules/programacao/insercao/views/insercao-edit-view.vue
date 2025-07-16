@@ -6,7 +6,6 @@ import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import InsercaoForm from '../insercao-form.vue';
 
-
 const route = useRoute();
 const id = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id ?? '';
 const isEdit = !!id;
@@ -25,20 +24,18 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
-    <PageHeader
-      title="Editar Inserção"
-      :breadcrumbs="[
-        { title: 'Início', href: '/', disabled: false },
-        { title: 'Inserções', href: paths.programacao.insercao.list, disabled: false },
-        { title: currentData?.nome || '...', disabled: true }
-      ]"
-    />
+  <PageHeader
+    title="Editar Inserção"
+    :breadcrumbs="[
+      { title: 'Início', href: '/', disabled: false },
+      { title: 'Inserções', href: paths.programacao.insercao.list, disabled: false },
+      { title: 'Editar', disabled: true }
+    ]"
+  />
 
-    <InsercaoForm
-      :current-id="id"
-      :current-data="currentData"
-      :is-edit="isEdit"
-    />
-  </div>
+  <InsercaoForm
+    :current-id="id"
+    :current-data="currentData"
+    :is-edit="isEdit"
+  />
 </template>

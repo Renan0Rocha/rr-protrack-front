@@ -46,6 +46,12 @@ const sidebarItem: menu[] = [
     to: paths.programacao.programa.list
   },
   {
+    title: 'Inserções',
+    icon: 'radio-minimalistic-linear',
+    BgColor: 'success',
+    to: paths.programacao.insercao.list
+  },
+  {
     title: 'Ordem do Bloco',
     icon: 'bill-list-linear',
     chip: '9',
