@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import UiParentCard from '@/components/shared/UiParentCard.vue';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { VendedorService } from '~/services/pessoa/vendedor-service';
 import VendedorFormDadosGerais from './vendedor-form-dados-gerais.vue';
@@ -12,11 +12,22 @@ const props = defineProps<{
 }>();
 
 const router = useRouter();
-
+const isEdit = props.isEdit ?? false;
+const loading = ref(false);
 const showSnackbar = ref(false);
 const snackbarMessage = ref('');
 const snackbarColor = ref<'success' | 'error'>('success');
-const loading = ref(false);
+
+const current = ref<Record<string, any> | null>(null);
+
+// quando props.currentData chegar (API), atualiza o ref
+watch(
+  () => props.currentData,
+  (newVal) => {
+    current.value = newVal;
+  },
+  { immediate: true }
+);
 
 function notify(message: string, color: 'success' | 'error' = 'success') {
   snackbarMessage.value = message;
@@ -28,7 +39,7 @@ async function handleSubmit(values: Record<string, any>) {
   try {
     loading.value = true;
 
-    if (props.isEdit && props.currentId) {
+    if (isEdit && props.currentId) {
       await VendedorService.update(props.currentId, values);
       notify('Vendedor atualizado com sucesso!', 'success');
     } else {
@@ -48,11 +59,13 @@ async function handleSubmit(values: Record<string, any>) {
 
 <template>
   <UiParentCard :title="isEdit ? 'Editar Vendedor' : 'Cadastro de Vendedor'">
+    <!-- Só renderiza o form depois de ter 'current' (no edit) -->
     <VendedorFormDadosGerais
-      :initial-data="props.currentData ?? {}"
-      :is-edit="props.isEdit"
-      @submit="handleSubmit"
+      v-if="!isEdit || (isEdit && current)"
+      :initial-data="current ?? {}"
+      :is-edit="isEdit"
       :loading="loading"
+      @submit="handleSubmit"
     />
   </UiParentCard>
 

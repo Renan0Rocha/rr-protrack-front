@@ -13,7 +13,7 @@ import ClienteForm from '../cliente-form.vue';
         { title: 'Clientes', href: '/pessoa/cliente', disabled: false },
         { title: 'Novo Cliente', disabled: true }
       ]"
-      :button-to="paths.pessoa.vendedor.list"
+      :button-to="paths.pessoa.cliente.list"
       button-label="Lista Clientes"
     />
     <ClienteForm />

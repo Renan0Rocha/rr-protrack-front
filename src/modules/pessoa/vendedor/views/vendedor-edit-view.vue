@@ -9,7 +9,6 @@ import VendedorForm from '../vendedor-form.vue';
 const route = useRoute();
 const id = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id ?? '';
 const isEdit = !!id;
-
 const currentData = ref<any>(null);
 
 onMounted(async () => {
