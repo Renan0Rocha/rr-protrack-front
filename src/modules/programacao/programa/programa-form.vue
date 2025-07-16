@@ -19,7 +19,6 @@ const snackbarMessage = ref('');
 const snackbarColor = ref<'success' | 'error'>('success');
 const router = useRouter();
 
-// 🔁 Atualiza "current" quando "props.currentData" mudar
 watch(
   () => props.currentData,
   (newVal) => {

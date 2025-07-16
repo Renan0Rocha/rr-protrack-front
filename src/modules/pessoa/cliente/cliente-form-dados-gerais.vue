@@ -14,17 +14,19 @@ const {
   nome, nomeErro,
   cpf, cpfErro,
   dataNasc, dataNascErro,
+  telefone, telefoneErro,
   vendedorId,   vendedorIdErro,
   vendedorNome, vendedorNomeErro,
 } = useClienteResolverDadosGerais(props.initialData ?? {});
 
 interface VendedorDto {
   cpf: string;
+  id: number;
   nome: string;
 }
 
 interface VendedorOption {
-  id: string;
+  id: string;  
   nome: string;
 }
 
@@ -32,8 +34,8 @@ const vendors = ref<VendedorOption[]>([]);
 
 onMounted(async () => {
   const list = (await VendedorService.findAll()) as VendedorDto[];
-  vendors.value = list.map((v: VendedorDto) => ({
-    id: v.cpf,
+  vendors.value = list.map(v => ({
+    id: String(v.id),     
     nome: v.nome,
   }));
 });
@@ -76,6 +78,15 @@ const onSubmit = handleSubmit(values => {
           type="date"
           outlined
           :error-messages="dataNascErro ? [dataNascErro] : []"
+        />
+      </v-col>
+
+      <v-col cols="12" md="6">
+        <v-text-field
+          v-model="telefone"
+          label="Telefone"
+          outlined
+          :error-messages="telefoneErro ? [telefoneErro] : []"
         />
       </v-col>
 

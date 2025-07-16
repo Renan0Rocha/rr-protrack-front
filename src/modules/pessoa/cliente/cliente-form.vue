@@ -7,9 +7,27 @@ import { useRoute, useRouter } from 'vue-router';
 import ClienteFormDadosGerais from './cliente-form-dados-gerais.vue';
 import ClienteFormEndereco from './cliente-form-endereco.vue';
 
+const props = defineProps<{
+  currentId?: string | number;
+  currentData?: Record<string, any> | null;
+  isEdit?: boolean;
+}>();
+
+const current = ref<Record<string, any> | null>(props.currentData ?? null);
+const isEdit = props.isEdit ?? false;
+const loading = ref(false);
 const showSnackbar    = ref(false);
 const snackbarMessage = ref('');
-const snackbarColor   = ref<'success'|'error'>('success');
+const snackbarColor = ref<'success' | 'error'>('success');
+
+watch(
+  () => props.currentData,
+  (newVal) => {
+    current.value = newVal;
+  },
+  { immediate: true }
+);
+
 
 function notify(message: string, color: 'success'|'error' = 'success') {
   snackbarMessage.value = message;
@@ -50,16 +68,29 @@ onMounted(async () => {
 
 const finalizeForm = async () => {
   try {
+    loading.value = true;
+
+    
     const sessionData = JSON.parse(sessionStorage.getItem(sessionKey) || '{}');
+
     const payload = {
-      ...sessionData.dadosGerais,
-      ...sessionData.endereco
+      nome:     sessionData.dadosGerais.nome,
+      cpf:      sessionData.dadosGerais.cpf,
+      dataNasc: sessionData.dadosGerais.dataNasc,
+      telefone: sessionData.dadosGerais.telefone,        
+      vendedor: {
+        id:   Number(sessionData.dadosGerais.vendedor.id),
+        nome: sessionData.dadosGerais.vendedor.nome
+      },
+      ...sessionData.endereco 
     };
 
     if (id) {
+      // UPDATE recebe o objeto DTO diretamente
       await ClienteService.update(id, payload);
       notify('Cliente atualizado com sucesso!', 'success');
     } else {
+      // CREATE idem
       await ClienteService.create(payload);
       notify('Cliente cadastrado com sucesso!', 'success');
     }
@@ -69,8 +100,12 @@ const finalizeForm = async () => {
   } catch (err) {
     console.error(err);
     notify('Erro ao salvar cliente', 'error');
+  } finally {
+    loading.value = false;
   }
 };
+
+
 </script>
 
 <template>
